@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useUserState } from '../../container/state/store';
 
 const CalculateExpense = () => {
-    const [loading, setLoading] = useState(false)
+    // const [loading, setLoading] = useState(false)
     const [totalExpenses, setTotalExpenses] = useState(null)
     const [totalExpenseAmount, setTotalExpenseAmount] = useState(null)
     const expenses = useUserState((state) => state.expenses)
@@ -12,13 +12,13 @@ const CalculateExpense = () => {
 
     useEffect(() => {
         const calculate = () => {
-            setLoading(true)
+            // setLoading(true)
             if (expenses !== null) {
                 const sum = expenses.reduce((accumulator, object) => {
                     return accumulator + object.amount;
                 }, 0);
                 const num = expenses.length;
-                console.log('num', num)
+                // console.log('num', num)
                 setTotalExpenses(num)
                 setTotalExpenseAmount(sum)
             } else {

@@ -1,26 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import { useUserState } from '../../container/state/store';
-import { BankOutlined, UsergroupAddOutlined } from '@ant-design/icons';
+import { UsergroupAddOutlined } from '@ant-design/icons';
 
 const CalcUser = () => {
-    const [loading, setLoading] = useState(false)
+    // const [loading, setLoading] = useState(false)
     const [total, setTotal] = useState(null)
     const users = useUserState((state) => state.users)
     // console.log(users)
 
-    const calculate = () => {
-        setLoading(true)
-        if (users !== null) {
-            const num = users.length;
-            setTotal(num)
-            setLoading(false)
-        } else {
-            setTotal(0)
-            setLoading(false)
-        }
-    }
+  
 
-    useEffect(() => { calculate() }, [users])
+    useEffect(() => {
+        const calculate = () => {
+            // setLoading(true)
+            if (users !== null) {
+                const num = users.length;
+                setTotal(num)
+                // setLoading(false)
+            } else {
+                setTotal(0)
+                // setLoading(false)
+            }
+        }
+        calculate()
+    }, [users])
     return (
         <div className=' bg-pink-500 h-[6rem] shadow rounded-md px-4 py-4'>
             <div className='flex'>

@@ -1,8 +1,8 @@
 import React from 'react';
-import { Select } from 'antd';
+// import { Select } from 'antd';
 
 
-const { option } = Select;
+// const { option } = Select;
 const StatsExpenses = () => {
     return (
         <div className=' h-[70vh] bg-white shadow-sm rounded p-4'>

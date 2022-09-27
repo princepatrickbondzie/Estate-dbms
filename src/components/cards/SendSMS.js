@@ -22,12 +22,12 @@ const SendSMS = () => {
     const onFinish = async (values) => {
         setLoading(true)
         values.sender = 'OTEstate'
-        console.log(values);
-        const data = {
-            'recepient': values.recepient,
-            'sender': 'OTEstate',
-            'message': values.message,
-        }
+        // console.log(values);
+        // const data = {
+        //     'recepient': values.recepient,
+        //     'sender': 'OTEstate',
+        //     'message': values.message,
+        // }
         const url = endPoint + '?key=' + apiKey
         const config = {
             headers: {

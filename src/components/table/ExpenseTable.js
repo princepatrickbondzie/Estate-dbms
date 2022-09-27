@@ -39,7 +39,7 @@ export default function ExpenseTable() {
         fetchData({
             pagination,
         });
-    }, []);
+    });
 
     const handleTableChange = (newPagination, filters, sorter) => {
         fetchData({

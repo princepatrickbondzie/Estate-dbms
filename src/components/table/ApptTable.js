@@ -40,7 +40,7 @@ function ApptTable() {
         fetchData({
             pagination,
         });
-    }, []);
+    });
 
     const handleTableChange = (newPagination, filters, sorter) => {
         fetchData({

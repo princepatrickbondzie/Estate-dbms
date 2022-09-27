@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Button, Space, Table, Input, message, Tooltip, Popconfirm } from 'antd';
-import { SearchOutlined, EditOutlined, ExportOutlined, DeleteOutlined } from '@ant-design/icons';
+import { SearchOutlined, ExportOutlined, DeleteOutlined } from '@ant-design/icons';
 import Highlighter from 'react-highlight-words';
 import instance from '../../container/services/provider';
 
@@ -12,7 +12,7 @@ const ViewAppt = () => {
         current: 1,
         pageSize: 10,
     });
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
     const location = useLocation()
     const options = location.state
     console.log(options.record)
@@ -30,7 +30,7 @@ const ViewAppt = () => {
         fetchData({
             pagination,
         });
-    }, []);
+    }, [pagination]);
 
     const handleTableChange = (newPagination, filters, sorter) => {
         fetchData({

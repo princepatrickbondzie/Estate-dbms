@@ -39,7 +39,7 @@ export default function UserTable() {
         fetchData({
             pagination,
         });
-    }, []);
+    });
 
     const handleTableChange = (newPagination, filters, sorter) => {
         fetchData({

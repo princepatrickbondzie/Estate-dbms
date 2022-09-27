@@ -3,24 +3,27 @@ import { useUserState } from '../../container/state/store';
 import { BankOutlined } from '@ant-design/icons';
 
 const CalcAppartment = () => {
-    const [loading, setLoading] = useState(false)
+    // const [loading, setLoading] = useState(false)
     const [total, setTotal] = useState(null)
     const appartments = useUserState((state) => state.appartments)
     // console.log(appartments)
 
-    const calculate = () => {
-        setLoading(true)
-        if (appartments !== null) {
-            const num = appartments.length;
-            setTotal(num)
-            setLoading(false)
-        } else {
-            setTotal(0)
-            setLoading(false)
-        }
-    }
 
-    useEffect(() => { calculate() }, [appartments])
+
+    useEffect(() => {
+        const calculate = () => {
+            // setLoading(true)
+            if (appartments !== null) {
+                const num = appartments.length;
+                setTotal(num)
+                // setLoading(false)
+            } else {
+                setTotal(0)
+                // setLoading(false)
+            }
+        }
+        calculate()
+    }, [appartments])
 
     return (
         <div className=' bg-orange-500 h-[6rem] shadow rounded-md px-4 py-4'>

@@ -38,7 +38,7 @@ const FMPaymentTable = () => {
         fetchData({
             pagination,
         });
-    }, []);
+    });
 
     // const onChange = (date, dateString) => {
     //     console.log(date, dateString);

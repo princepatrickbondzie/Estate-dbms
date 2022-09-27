@@ -17,21 +17,20 @@ const ViewAppt = () => {
     const options = location.state
     console.log(options.record)
 
-   
+    const fetchData = (params = {}) => {
+        setTableLoader(true)
+        setData(options.record.recordPayments)
+        setPagination({
+            ...params.pagination,
+            total: options.record.recordPayments ? options.record.recordPayments.lenght : 0,
+        });
+        setTableLoader(false)
+    }
     useEffect(() => {
-        const fetchData = (params = {}) => {
-            setTableLoader(true)
-            setData(options.record.recordPayments)
-            setPagination({
-                ...params.pagination,
-                total: options.record.recordPayments ? options.record.recordPayments.lenght : 0,
-            });
-            setTableLoader(false)
-        }
         fetchData({
             pagination,
         });
-    }, [pagination]);
+    }, [fetchData, pagination]);
 
     const handleTableChange = (newPagination, filters, sorter) => {
         fetchData({

@@ -8,22 +8,25 @@ const CalculateExpense = () => {
     const expenses = useUserState((state) => state.expenses)
     // console.log(expenses)
 
-    const calculate = () => {
-        setLoading(true)
-        if (expenses !== null) {
-            const sum = expenses.reduce((accumulator, object) => {
-                return accumulator + object.amount;
-            }, 0);
-            const num = expenses.length;
-            console.log('num', num)
-            setTotalExpenses(num)
-            setTotalExpenseAmount(sum)
-        } else {
 
+
+    useEffect(() => {
+        const calculate = () => {
+            setLoading(true)
+            if (expenses !== null) {
+                const sum = expenses.reduce((accumulator, object) => {
+                    return accumulator + object.amount;
+                }, 0);
+                const num = expenses.length;
+                console.log('num', num)
+                setTotalExpenses(num)
+                setTotalExpenseAmount(sum)
+            } else {
+
+            }
         }
-    }
-
-    useEffect(() => { calculate() }, [expenses])
+        calculate()
+    }, [expenses])
 
     return (
         <div className=' bg-blue-500 h-[6rem] shadow rounded-md px-4 py-4'>

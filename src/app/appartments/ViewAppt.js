@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { Button, Space, Table, Input, message, Tooltip, Popconfirm } from 'antd';
 import { SearchOutlined, ExportOutlined, DeleteOutlined } from '@ant-design/icons';
 import Highlighter from 'react-highlight-words';
@@ -17,16 +17,17 @@ const ViewAppt = () => {
     const options = location.state
     console.log(options.record)
 
-    const fetchData = (params = {}) => {
-        setTableLoader(true)
-        setData(options.record.recordPayments)
-        setPagination({
-            ...params.pagination,
-            total: options.record.recordPayments ? options.record.recordPayments.lenght : 0,
-        });
-        setTableLoader(false)
-    }
+   
     useEffect(() => {
+        const fetchData = (params = {}) => {
+            setTableLoader(true)
+            setData(options.record.recordPayments)
+            setPagination({
+                ...params.pagination,
+                total: options.record.recordPayments ? options.record.recordPayments.lenght : 0,
+            });
+            setTableLoader(false)
+        }
         fetchData({
             pagination,
         });

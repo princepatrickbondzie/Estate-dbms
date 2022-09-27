@@ -1,0 +1,16 @@
+.trigger {
+  line-height: 64px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+btntoggle{
+  background: #167658;
+}
+.bg-header{
+    background: #1DA57A;
+}
+
+.site-layout .site-layout-background, .bg-white {
+  background: #f9f9f9;
+  /* background: #F0F2F5; */
+}

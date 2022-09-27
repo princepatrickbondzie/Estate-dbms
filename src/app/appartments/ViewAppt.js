@@ -30,7 +30,7 @@ const ViewAppt = () => {
         fetchData({
             pagination,
         });
-    }, [fetchData, pagination]);
+    }, [fetchData(), pagination]);
 
     const handleTableChange = (newPagination, filters, sorter) => {
         fetchData({

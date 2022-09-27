@@ -15,7 +15,6 @@ export default function ExpenseTable() {
     });
 
     const setExpenses = useUserState((state) => state.setExpenses)
-
     const fetchData = async (params = {}) => {
         setTableLoader(true)
         try {

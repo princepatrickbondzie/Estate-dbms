@@ -40,7 +40,8 @@ function ApptTable() {
         fetchData({
             pagination,
         });
-    });
+        // eslint-disable-next-line
+    }, []);
 
     const handleTableChange = (newPagination, filters, sorter) => {
         fetchData({
@@ -215,7 +216,7 @@ function ApptTable() {
             fetchData({
                 pagination,
             });
-            
+
         } catch (error) {
             if (error) {
                 message.error(error ? (error.response.data && error.response.data.message ? error.response.data.message : error.message) : '')

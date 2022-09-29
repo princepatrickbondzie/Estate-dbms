@@ -35,6 +35,7 @@
   "scripts": {
     "start": "craco start",
     "build": "craco build",
+    "prod": "serve -s build",
     "test": "craco test",
     "eject": "react-scripts eject"
   },

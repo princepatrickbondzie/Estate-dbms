@@ -38,7 +38,8 @@ const FMPaymentTable = () => {
         fetchData({
             pagination,
         });
-    });
+        // eslint-disable-next-line
+    }, []);
 
     // const onChange = (date, dateString) => {
     //     console.log(date, dateString);

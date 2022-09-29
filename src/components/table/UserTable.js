@@ -39,7 +39,8 @@ export default function UserTable() {
         fetchData({
             pagination,
         });
-    });
+        // eslint-disable-next-line
+    }, []);
 
     const handleTableChange = (newPagination, filters, sorter) => {
         fetchData({

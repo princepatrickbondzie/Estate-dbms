@@ -5,6 +5,7 @@ import Highlighter from 'react-highlight-words';
 import { useGlobalModalContext, MODAL_TYPES } from "../container/context/GlobalModal";
 import instance from '../container/services/provider';
 import { useUserState } from '../container/state/store';
+import { useNavigate } from 'react-router-dom'
 
 const FMPaymentTable = () => {
     const [datax, setDatax] = useState();
@@ -13,6 +14,7 @@ const FMPaymentTable = () => {
         current: 1,
         pageSize: 10,
     });
+    const navigate = useNavigate()
     const setPayments = useUserState((state) => state.setPayments)
 
     const fetchData = async (params = {}) => {
@@ -194,7 +196,7 @@ const FMPaymentTable = () => {
                         <EditOutlined style={{ fontSize: '17px' }} className=" hover:text-blue-600 cursor-pointer" />
                     </Tooltip>
                     <Tooltip title="Export" color="purple">
-                        <ExportOutlined style={{ fontSize: '17px' }} className=" hover:text-blue-600 cursor-pointer mx-2" />
+                        <ExportOutlined onClick={() => navigate(`/facility-management/${record._id}`, { state: { record } })} style={{ fontSize: '17px' }} className=" hover:text-blue-600 cursor-pointer mx-2" />
                     </Tooltip>
                     <Popconfirm title="Are you sure you want to delete this payment?"
                         onConfirm={() => confirm(record._id)}

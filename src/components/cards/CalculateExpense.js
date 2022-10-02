@@ -15,7 +15,7 @@ const CalculateExpense = () => {
             // setLoading(true)
             if (expenses !== null) {
                 const sum = expenses.reduce((accumulator, object) => {
-                    return accumulator + object.amount;
+                    return accumulator + object.totalAmount;
                 }, 0);
                 const num = expenses.length;
                 // console.log('num', num)

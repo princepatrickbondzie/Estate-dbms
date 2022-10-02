@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { useGlobalModalContext } from '../../container/context/GlobalModal';
 import { Modal, Form, Input, Select, message } from "antd";
-import instance from '../../container/services/provider';
+// import instance from '../../container/services/provider';
+import axios from 'axios';
 
 const { Option } = Select;
 export default function UserModal() {
@@ -30,7 +31,7 @@ export default function UserModal() {
                 values.isSuperAdmin = true
             }
             try {
-                const { data } = await instance.post('/auth/signup', values).then((response) => Promise.resolve(response))
+                const { data } = await axios.post('https://better-zipper-lion.cyclic.app/api/v1/auth/signup', values).then((response) => Promise.resolve(response))
                 if (data) {
                     setLoading(false)
                     hideModal();

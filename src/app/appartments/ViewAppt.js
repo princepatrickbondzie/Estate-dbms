@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Button, Space, Table, Input, message, Tooltip, Popconfirm } from 'antd';
 import { SearchOutlined, ExportOutlined, DeleteOutlined } from '@ant-design/icons';
 import Highlighter from 'react-highlight-words';
@@ -12,25 +12,34 @@ const ViewAppt = () => {
         current: 1,
         pageSize: 10,
     });
-    // const navigate = useNavigate()
+    const navigate = useNavigate()
     const location = useLocation()
     const options = location.state
     console.log(options.record)
 
-    const fetchData = (params = {}) => {
+    const fetchData = async (params = {}) => {
         setTableLoader(true)
-        setData(options.record.recordPayments)
-        setPagination({
-            ...params.pagination,
-            total: options.record.recordPayments ? options.record.recordPayments.lenght : 0,
-        });
-        setTableLoader(false)
+        try {
+            const { data } = await instance.get('/record-payment/all')
+            const searchAppt = data.recordPayments.filter((record) => record.appartment === options.record.houseNumber)
+            console.log(searchAppt)
+            setData(searchAppt)
+            setPagination({
+                ...params.pagination,
+                total: options.record.recordPayments ? options.record.recordPayments.lenght : 0,
+            });
+            setTableLoader(false)
+        } catch (error) {
+            setTableLoader(false)
+            console.log(error)
+        }
     }
     useEffect(() => {
         fetchData({
             pagination,
         });
-    });
+        // eslint-disable-next-line
+    }, []);
 
     const handleTableChange = (newPagination, filters, sorter) => {
         fetchData({
@@ -178,7 +187,7 @@ const ViewAppt = () => {
             render: (_, record) => (
                 <Space size="middle" className='flex'>
                     <Tooltip title="Export" color="purple">
-                        <ExportOutlined style={{ fontSize: '17px' }} className=" hover:text-blue-600 cursor-pointer mx-2" />
+                        <ExportOutlined onClick={() => navigate(`/facility-management/${record._id}`, { state: { record } })} style={{ fontSize: '17px' }} className=" hover:text-blue-600 cursor-pointer mx-2" />
                     </Tooltip>
                     <Popconfirm title="Are you sure you want to delete this paymment?"
                         onConfirm={() => confirm(record._id)}
@@ -216,7 +225,6 @@ const ViewAppt = () => {
     return (
         <div>
             <div className='py-4'>
-
             </div>
             <Table
                 columns={columns}

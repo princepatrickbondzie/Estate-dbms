@@ -5,6 +5,7 @@ import Highlighter from 'react-highlight-words';
 import { useGlobalModalContext, MODAL_TYPES } from "../../container/context/GlobalModal";
 import instance from '../../container/services/provider';
 import { useUserState } from '../../container/state/store';
+import { useNavigate } from 'react-router-dom';
 
 export default function ExpenseTable() {
     const [datax, setDatax] = useState();
@@ -14,6 +15,7 @@ export default function ExpenseTable() {
         pageSize: 10,
     });
 
+    const navigate = useNavigate()
     const setExpenses = useUserState((state) => state.setExpenses)
     const fetchData = async (params = {}) => {
         setTableLoader(true)
@@ -163,9 +165,14 @@ export default function ExpenseTable() {
             key: 'quantity',
         },
         {
-            title: 'Amount (GHC)',
-            dataIndex: 'amount',
-            key: 'amount',
+            title: 'Unit Price (GHC)',
+            dataIndex: 'unitPrice',
+            key: 'unitPrice',
+        },
+        {
+            title: 'Total (GHC)',
+            dataIndex: 'totalAmount',
+            key: 'totalAmount',
         },
         {
             title: 'Created by:',
@@ -188,7 +195,7 @@ export default function ExpenseTable() {
                         <EyeOutlined style={{ fontSize: '17px' }} className=" hover:text-blue-600 cursor-pointer" />
                     </Tooltip>
                     <Tooltip title="Export" color="purple">
-                        <ExportOutlined style={{ fontSize: '17px' }} className=" hover:text-blue-600 cursor-pointer mx-2" />
+                        <ExportOutlined onClick={() => navigate(`/expense/${record._id}`, { state: { record } })} style={{ fontSize: '17px' }} className=" hover:text-blue-600 cursor-pointer mx-2" />
                     </Tooltip>
                     <Popconfirm title="Are you sure you want to delete this expense?"
                         onConfirm={() => confirm(record._id)}

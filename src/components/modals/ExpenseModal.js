@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useGlobalModalContext } from '../../container/context/GlobalModal';
-import { Modal, Form, Input, message } from "antd";
+import { Modal, Form, Input, message, Row } from "antd";
 import instance from '../../container/services/provider';
 import { useUserState } from '../../container/state/store';
 
@@ -77,11 +77,19 @@ export default function ExpenseModal() {
                     >
                         <Input type="number" placeholder='Item quantity' />
                     </Form.Item>
-                    <Form.Item name="amount" label="Amount &#8373;" rules={[
-                        { required: true, message: "Amount is required!" }
+                    <Row className='flex justify-between'>
+                        <Form.Item name="unitPrice" label="Unit Price &#8373;" rules={[
+                            { required: true, message: "Unit price is required!" }
                     ]}>
                         <Input type="number" placeholder='&#8373; 0.00' />
                     </Form.Item>
+                    <Form.Item name="totalAmount" label="Total Amount &#8373;" rules={[
+                        { required: true, message: "Total amount is required!" }
+                    ]}>
+                        <Input type="number" placeholder='&#8373; 0.00' />
+                    </Form.Item>
+                    </Row>
+                    
                 </Form>
             </Modal>
         </div>

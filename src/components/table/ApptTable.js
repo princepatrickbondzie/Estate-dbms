@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Button, Space, Table, Input, message, Popconfirm, Tooltip } from 'antd';
-import { SearchOutlined, ExportOutlined, DeleteOutlined, EyeOutlined } from '@ant-design/icons';
+import { SearchOutlined, DeleteOutlined, EyeOutlined } from '@ant-design/icons';
 import Highlighter from 'react-highlight-words';
 import { useGlobalModalContext, MODAL_TYPES } from "../../container/context/GlobalModal";
 import instance from '../../container/services/provider';
@@ -193,9 +193,6 @@ function ApptTable() {
                 <Space size="middle" className='flex'>
                     <Tooltip title="Edit" color="blue">
                         <EyeOutlined onClick={() => navigate(`/appartments/${record._id}`, { state: { record } })} style={{ fontSize: '17px' }} className=" hover:text-blue-600 cursor-pointer" />
-                    </Tooltip>
-                    <Tooltip title="Export" color="purple">
-                        <ExportOutlined style={{ fontSize: '17px' }} className=" hover:text-blue-600 cursor-pointer mx-2" />
                     </Tooltip>
                     <Popconfirm title="Are you sure you want to delete this appartment?"
                         onConfirm={() => confirm(record._id)}

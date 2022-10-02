@@ -11,6 +11,8 @@ import Messages from '../../app/messages'
 import FacilityManagement from '../../app/facility-management'
 import Expense from '../../app/expense'
 import System from '../../app/system'
+import ExpenseInvoice from '../../app/expense/Invoice'
+import FeeInvoice from '../../app/facility-management/Invoice'
 
 import { GlobalModal } from '../context/GlobalModal'
 import UserRoutes from './ProtectedRoutes'
@@ -29,8 +31,10 @@ export default function AppRoutes() {
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="message" element={<Messages />} />
               <Route path="expense" element={<Expense />} />
+              <Route path="expense/:id" element={<ExpenseInvoice />} />
               <Route path="system" element={<System />} />
               <Route path="facility-management" element={<FacilityManagement />} />
+              <Route path="facility-management/:id" element={<FeeInvoice />} />
             </Route>
           </Route>
         </Routes>

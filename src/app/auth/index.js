@@ -32,7 +32,7 @@ export default function Auth() {
         setUser(data.user)
         setToken(data.accessToken)
         setLoading(false)
-        navigate('/expense')
+        navigate('/dashboard')
       }
     } catch (error) {
       setLoading(false)

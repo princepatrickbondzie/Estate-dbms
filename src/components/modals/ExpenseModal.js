@@ -23,14 +23,13 @@ export default function ExpenseModal() {
             values.user = user.fullname;
             try {
                 const { data } = await instance.post('/expense/create', values).then((response) => Promise.resolve(response))
-                console.log(data)
+                // console.log(data)
                 if (data) {
                     setLoading(false)
                     hideModal();
                     action()
                     message.success({
                         content: 'Expense created successfully',
-                        // onClose: () => action(),
                     });
                 }
             } catch (error) {

@@ -2,13 +2,10 @@ import React, { useState } from 'react';
 import { Form, Input, message, Button } from "antd";
 import { useUserState } from '../../container/state/store';
 import { Select } from 'antd';
-import axios from 'axios';
+import instance from '../../container/services/provider';
 
 const { Option } = Select;
 const { TextArea } = Input;
-
-const endPoint = 'https://api.mnotify.com/api/sms/quick'
-const apiKey = 'quCkGOswCDJxA0LdMSwoaMAgbGlC4cnvG0PnOiTrWCYwD'
 
 const SendSMS = () => {
     const [form] = Form.useForm();
@@ -16,33 +13,24 @@ const SendSMS = () => {
     const appartments = useUserState((state) => state.appartments)
 
     const handleChange = (value) => {
-        console.log(`${value}`);
+        // console.log(`${value}`);
     };
 
     const onFinish = async (values) => {
         setLoading(true)
-        values.sender = 'OTEstate'
-        // console.log(values);
-        // const data = {
-        //     'recepient': values.recepient,
-        //     'sender': 'OTEstate',
-        //     'message': values.message,
-        // }
-        const url = endPoint + '?key=' + apiKey
-        const config = {
-            headers: {
-                'Accept': 'application/json'
-            },
-        };
-
-        await axios.post(url, values, config).then(function (response) {
+        // console.log(values)
+        try {
+            const { data } = await instance.post('/sms/create', values)
+            if (data) {
+                setLoading(false)
+                message.success({ content: '🟢Message sent successfully🟢' })
+            }
+        } catch (err) {
             setLoading(false)
-            message.success('🟢Message sent successfully🟢')
-            console.log(JSON.stringify(response.data));
-        }).catch(function (error) {
-            setLoading(false)
-            console.log(error);
-        })
+            if (err) {
+                message.error(err ? (err.response.data && err.response.data.message ? err.response.data.message : err.message) : '')
+            }
+        }
     };
 
     return (

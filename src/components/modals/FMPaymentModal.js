@@ -20,7 +20,7 @@ export default function FMPaymentModal() {
   const fetchData = async (params = {}) => {
     try {
       const { data } = await instance.get('/appartment/all')
-      console.log(data)
+      // console.log(data)
       if (data) {
         setAppartments(data.appartments);
       }
@@ -40,19 +40,19 @@ export default function FMPaymentModal() {
   };
 
   const onDateChange = (date, dateString) => {
-    console.log(date, dateString);
+    // console.log(date, dateString);
     setDta(dateString)
   };
 
   const onChange = (value) => {
     const filter = appartments.filter((el) => el.houseNumber === value)
-    console.log(filter[0].ownerName)
+    // console.log(filter[0].ownerName)
     setPaidBy(filter[0].ownerName)
-    console.log(`selected: ${value}`);
+    // console.log(`selected: ${value}`);
   };
 
   const onSearch = (value) => {
-    console.log('search:', value);
+    // console.log('search:', value);
   };
 
 
@@ -63,17 +63,16 @@ export default function FMPaymentModal() {
       values.recordedBy = user.fullname;
       values.monthDue = dta
       values.paidBy = paidBy
-      console.log(values);
+      // console.log(values);
       try {
         const { data } = await instance.post('/record-payment/create', values).then((response) => Promise.resolve(response))
-        console.log(data)
+        // console.log(data)
         if (data) {
           setLoading(false)
           hideModal();
           action()
           message.success({
             content: 'Payment recorded successfully',
-            // onClose: () => action(),
           });
         }
       } catch (error) {

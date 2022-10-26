@@ -25,12 +25,18 @@ const InvoiceComponent = React.forwardRef((props, ref) => {
 
   return (
     <div ref={ref} className='flex justify-center my-4'>
-      <div className='py-4 px-4 bg-white w-[70%] min-h-[50vh] block'>
-        <div className=' w-[70%] mx-auto text-center'>
-          <span className='text-[2rem] font-semibold'>Osei Tutu II Estate</span>
-          <span className=' leading-[20px] block'>Asokore-Mampong, Kumasi</span>
-          <span className='block'>Email: oseitutuiiestate@gmail.com</span>
-          <span className=''>Tel: 0256694394 - 0557899979</span>
+      <div className='py-4 px-4 bg-white w-[80%] min-h-[50vh] block'>
+        <div className=' w-full flex justify-between mx-auto text-center'>
+          <div className=' text-left'>
+            <span className='text-[2rem] font-bold'>OSEI TUTU II ESTATE</span>
+            <span className='block text-[1rem] font-medium'>EXPENSES</span>
+          </div>
+          <div className='font-semibold text-base text-right'>
+            <span className=''>(032) 249 8822</span>
+            <span className='block'>(233) 546 924 284</span>
+            <span className='block'>oseitutuiiestate@gmail.com</span>
+            <span className=' leading-[20px] block'>AAK-318-4262</span>
+          </div>
         </div>
         <div className='flex justify-between my-8'>
           <div className=''>
@@ -43,37 +49,43 @@ const InvoiceComponent = React.forwardRef((props, ref) => {
         </div>
         <div className='my-4'>
           <table className='w-full'>
-            <thead className='border h-10 text-[0.85rem] py-2'>
-              <tr className='h-full w-full'>
-                <th>
+            <thead className='border bg-gray-800 text-white h-10 text-[0.85rem] py-2'>
+              <tr className='h-full w-full '>
+                <th className='border-2 border-gray-500'>
                   PRODUCT/ITEM
                 </th>
-                <th>
+                <th className='border-2 border-gray-500'>
                   QUANTTY
                 </th>
-                <th>
+                <th className='border-2 border-gray-500'>
                   PRICE
                 </th>
-                <th>
+                <th className='border-2 border-gray-500'>
                   TOTAL
                 </th>
               </tr>
             </thead>
             <tbody>
               <tr className='text-center'>
-                <td className='border'>{data.record.item}</td>
-                <td className='border'>{data.record.quantity}</td>
-                <td className='border'>&#8373;{data.record.unitPrice}</td>
-                <td className='border'>&#8373;{data.record.totalAmount}</td>
+                <td className='border-2 border-gray-500'>{data.record.item}</td>
+                <td className='border-2 border-gray-500'>{data.record.quantity}</td>
+                <td className='border-2 border-gray-500'>&#8373;{data.record.unitPrice}.00</td>
+                <td className='border-2 border-gray-500'>&#8373;{data.record.totalAmount}.00</td>
               </tr>
               <tr className='text-center h-10 text-base'>
-                <td className=''></td>
-                <td className=''></td>
-                <td className=' font-semibold'>Total</td>
-                <td className='border font-semibold'>&#8373;{data.record.totalAmount}</td>
+                <td className='border-2 border-gray-500'></td>
+                <td className='border-2 border-gray-500'></td>
+                <td className=' font-bold border-2 border-gray-500'>Total</td>
+                <td className='border-2 border-gray-500 font-semibold'>&#8373;{data.record.totalAmount}.00</td>
               </tr>
             </tbody>
           </table>
+        </div>
+        <div className='flex justify-end mt-20'>
+          <div className='mr-8'>
+            <h1 className='font-bold'>--------------------------</h1>
+            <h1>SIGNATURE & STAMP</h1>
+          </div>
         </div>
       </div>
     </div>

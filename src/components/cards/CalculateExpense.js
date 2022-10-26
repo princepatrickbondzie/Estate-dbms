@@ -21,8 +21,6 @@ const CalculateExpense = () => {
                 // console.log('num', num)
                 setTotalExpenses(num)
                 setTotalExpenseAmount(sum)
-            } else {
-
             }
         }
         calculate()

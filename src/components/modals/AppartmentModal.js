@@ -19,14 +19,13 @@ export default function AppartmentModal() {
         form.validateFields().then(async (values) => {
             try {
                 const { data } = await instance.post('/appartment/create', values).then((response) => Promise.resolve(response))
-                console.log(data)
+                // console.log(data)
                 if (data) {
                     setLoading(false)
                     hideModal();
                     action()
                     message.success({
                         content: 'Appartment created successfully',
-                        // onClose: () => action(),
                     });
                 }
             } catch (error) {

@@ -2,21 +2,13 @@ import React, { useRef } from 'react'
 import { useLocation } from 'react-router-dom'
 import moment from 'moment'
 import ReactToPrint from "react-to-print";
+import logo from "../../assets/image/logo.jpg"
 
 const InvoiceComponent = React.forwardRef((props, ref) => {
-    // console.log('ref:', ref)
     const location = useLocation()
     const data = location.state
-    console.log(data.record)
-
-    const calcUnit = () => {
-        return data.record.amount / data.record.monthDue.length
-
-    }
-
-    // const todays = () => {
-    //     return moment(Date().toLocaleString()).format('DD MMMM YYYY')
-    // }
+    // console.log(data.record)
+    // console.log(data.record.monthDue.length)
 
     const generateId = () => {
         let token = '';
@@ -28,53 +20,104 @@ const InvoiceComponent = React.forwardRef((props, ref) => {
         return token;
     }
 
+    function getMonthDifference(startDate, endDate) {
+        return (
+            new Date(endDate).getMonth() -
+            new Date(startDate).getMonth() +
+            12 * (new Date(endDate).getFullYear() - new Date(startDate).getFullYear())
+        );
+    }
+    
     return (
         <div ref={ref} className='flex justify-center my-4'>
-            <div className='py-4 px-4 bg-white w-[70%] min-h-[50vh] block'>
-                <div className=' w-[70%] mx-auto text-center'>
-                    <span className='text-[2rem] font-semibold'>Osei Tutu II Estate</span>
-                    <span className=' leading-[20px] block'>Asokore-Mampong, Kumasi</span>
-                    <span className='block'>Email: oseitutuiiestate@gmail.com</span>
-                    <span className=''>Tel: 0256694394 - 0557899979</span>
+            <div className='py-4 px-4 bg-white w-[90%] min-h-[50vh] block'>
+                <div className=' w-full flex justify-between mx-auto text-center'>
+                    <div className=' text-left'>
+                        <span className='text-[1.8rem] font-bold'>OSEI TUTU II ESTATE</span>
+                        <span className='block text-[1rem] font-medium'>FACILITY MANAGEMENT FEE</span>
+                    </div>
+                    <div className='font-semibold text-[0.9rem] text-right'>
+                        <span className=''>(032) 249 8822</span>
+                        <span className='block'>(233) 546 924 284</span>
+                        <span className='block'>oseitutuiiestate@gmail.com</span>
+                        <span className=' leading-[20px] block'>AAK-318-4262</span>
+                    </div>
                 </div>
                 <div className='flex justify-between my-8'>
-                    <div className=''>
+                    <div>
                         <h3 className='text-base'>Parment Details</h3>
-                        <div className='text-sm capitalize'>Appartment No. {data.record.appartment}</div>
-                        <div className=' text-sm capitalize'>Payment Method: {data.record.paymentMode}</div>
-                        <div className=' text-sm capitalize'>Account: {data.record.accountNumber}</div>
-                        <div className=' text-sm capitalize'>Date: {moment(data.record.createdAt).format('DD MMMM YYYY')}</div>
-                        {/* <div className=' text-sm capitalize'>Recorded by: {data.record.user}</div> */}
+                        <table>
+                            <thead className='bg-gray-800 border text-white'>
+                                <tr className='text-sm border px-2 font-[400]'>
+                                    <th className='text-xs border border-gray-500 px-2 font-[400]'>APPT. NO.</th>
+                                    <th className='text-xs border border-gray-500 px-2 font-[400]'>CLIENT</th>
+                                    <th className='text-xs border border-gray-500 px-2 font-[400]'>PAYMENT METHOD</th>
+                                    <th className='text-xs border border-gray-500 px-2 font-[400]'>ACCOUNT</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr className='text-center text-sm'>
+                                    <td className='text-xs border border-gray-500 px-2'>{data.record.appartment}</td>
+                                    <td className='text-xs border border-gray-500 px-2'>{data.record.paidBy}</td>
+                                    <td className='text-xs border border-gray-500 px-2'>{data.record.paymentMode}</td>
+                                    <td className='text-xs border border-gray-500 px-2'>{data.record.accountNumber}</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                     <div>
-                        <h1 className='text-base'>Invoice #{generateId()}</h1>
+                        <h3 className='text-base'>Invoice #{generateId()}</h3>
+                        <h3 className='text-sm -mt-2'>Date: {moment(data.record.createdAt).format('DD MMMM YYYY')}</h3>
                     </div>
                 </div>
+
                 <div className='my-4'>
                     <table className='w-full'>
-                        <thead className='border h-8 bg-gray-200 text-[0.85rem] py-2'>
+                        <thead className='border h-10 bg-gray-800 text-white text-[0.85rem] py-2'>
                             <tr className='h-full w-full'>
-                                <th>
-                                    Month Due
+                                <th className='border-2 border-gray-500'>
+                                    MONTHS
                                 </th>
-                                <th>
-                                    Amount
+                                <th className='border-2 border-gray-500'>
+                                    DESCRIPTION
+                                </th>
+                                <th className='border-2 border-gray-500'>
+                                    PRICE &#8373;
+                                </th>
+                                <th className='border-2 border-gray-500'>
+                                    TOTAL &#8373;
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
-                            {data.record.monthDue.map((item, i) => (
-                                <tr key={i} className='text-center'>
-                                    <td className='border'>{moment(item).format('MMMM YYYY')}</td>
-                                    <td className='border'>{calcUnit()}</td>
-                                </tr>
-                            ))}
+                            <tr>
+                                <td className='text-center border-2 border-gray-500 px-4'>{getMonthDifference(data.record.monthDue[0], data.record.monthDue[1])}</td>
+                                <td className='text-center border-2 border-gray-500 px-4'>{data.record.monthDue.length === 0 ? moment(data.record.monthDue[0]).format('MMMM YYYY') : (
+                                    <>
+                                        {data.record.monthDue[0] === data.record.monthDue[1] ? moment(data.record.monthDue[0]).format('MMMM YYYY') : (
+                                            <>
+                                                {moment(data.record.monthDue[0]).format('MMMM YYYY')} to {moment(data.record.monthDue[1]).format('MMMM YYYY')}
+                                            </>
+                                        )}
+                                    </>
+                                )}</td>
+                                <td className='text-center border-2 border-gray-500 px-4'>200.00</td>
+                                <td className='text-center border-2 border-gray-500 px-4'>{data.record.amount}.00</td>
+                            </tr>
                             <tr className='text-center h-10 text-base'>
-                                <td className=' font-semibold'></td>
-                                <td className=' font-semibold'>Total:  &#8373;{data.record.amount}</td>
+                                <td className='text-center border-2 border-gray-500'></td>
+                                <td className='text-center border-2 border-gray-500'></td>
+                                <td className='text-center border-2 border-gray-500 font-semibold'>Total</td>
+                                <td className='text-center border-2 border-gray-500 font-semibold'>&#8373;{data.record.amount}.00</td>
                             </tr>
                         </tbody>
                     </table>
+                </div>
+                <div className='flex justify-end mt-20'>
+                    <div className='mr-8'>
+                        <h1 className='font-bold'>--------------------------</h1>
+                        <h1>SIGNATURE & STAMP</h1>
+                    </div>
                 </div>
             </div>
         </div>
